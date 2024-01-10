@@ -1,0 +1,47 @@
+.valueBox{
+    border: 1.5px solid rgb(247, 48, 177);
+    text-align: right;
+    background-color: rgb(249, 232, 235);
+    width:82%;
+    height: 2.8rem;
+    font-size: 2.4rem;
+    color: rgb(247, 48, 177);
+    padding: 2px 5px 0px 2px;
+    margin: 30px auto;
+    
+}
+.calcOutline{
+    border: 1.5px solid rgb(247, 48, 177);
+    padding: 5px 1px;
+    box-shadow: 1px 1px 1px rgb(247, 48, 177);
+    width: 12%;
+    margin: 0 auto;
+    background-color: rgb(247, 190, 214);
+
+}
+.clear{
+    width: 16rem;
+    margin: 12px 0px 15px 25px;
+    border: solid rgb(247, 48, 177) 1.5px;
+
+}
+.row1, .row2, .row3, .row4{
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+    margin: 0 auto;
+    padding: 7px 0px 18px 0px;
+}
+button{
+    width: 21%;
+    height: 3.4rem;
+    margin: 0 auto;
+    border: 1.5px solid rgb(247, 48, 177);
+    color: rgb(247, 48, 177);
+    background-color: rgb(249, 232, 235);
+    font-size: 1.8rem;
+}
+body{
+    margin: 100px auto;
+    font-family: 'Courier New', Courier, monospace;
+}
