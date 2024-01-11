@@ -22,8 +22,10 @@
 .clear{
     width: 16rem;
     margin: 12px 0px 15px 25px;
-    border: solid rgb(247, 48, 177) 1.5px;
-
+    border: solid rgb(247, 48, 177) 1.7px;
+    font-size: 2rem;
+    color: rgb(247, 48, 177);
+    background-color: rgb(249, 232, 235);
 }
 .row1, .row2, .row3, .row4{
     display: flex;
@@ -32,7 +34,7 @@
     margin: 0 auto;
     padding: 7px 0px 18px 0px;
 }
-button{
+.button{
     width: 21%;
     height: 3.4rem;
     margin: 0 auto;
@@ -42,6 +44,7 @@ button{
     font-size: 1.8rem;
 }
 body{
-    margin: 100px auto;
+    margin: 150px auto;
     font-family: 'Courier New', Courier, monospace;
+    background-color: rgb(250, 220, 225);
 }
