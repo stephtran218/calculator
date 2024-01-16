@@ -19,7 +19,7 @@
     background-color: rgb(247, 190, 214);
 
 }
-.clear{
+#clearBtn{
     width: 16rem;
     margin: 12px 0px 15px 25px;
     border: solid rgb(247, 48, 177) 1.7px;
