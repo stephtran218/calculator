@@ -1,120 +1,105 @@
+//These variables hold info for the buttons 
 let numButtons = document.querySelectorAll(".button");
-let divBtn = document.getElementById("divBtn");
-let multBtn = document.getElementById("multBtn");
-let subBtn = document.getElementById("subBtn");
-let addBtn = document.getElementById("addBtn");
-let equalBtn = document.getElementById("equalBtn");
 let clear = document.getElementById("clearBtn");
-let decimalBtn = document.getElementById("decimalBtn");
 let display = document.getElementById("numDisplay");
 
-let startingInput = 0;
-let currentInput = "";
+//These variables will hold what the user selects into the calculator
+let startingInput = "";
 let secondInput = "";
 let operator = "";
 
-function appearNumbers(event) {
+//This function allows the buttons clicked to show its value on the calculator display
+function appearNumbers(thing) {
+    display.innerText = thing.innerText
+}
+
+//Once user clicks on the button, the number displayed will be taken as startingInput. 
+function handleClick(event) {
     let buttonClicked = event.target;
-    currentInput += buttonClicked.innerText;
-    display.innerText = currentInput;
-}
 
-function handleNumberClick(number) {
-    currentInput += number;
-    appearNumbers();
-}
-
-function addNumbers() {
-    if (currentInput !== "") {
-        secondInput = parseFloat(currentInput);
-        if (!isNaN(secondInput)) {
-            operator = "+";
-            currentInput = "";
-            display.innerText = startingInput;
-        } else {
-            display.innerText = "Error";
-        }
+    //This checks if the button clicked was a valid number and if it contains a decimal
+    if(!isNaN(buttonClicked.innerText) || buttonClicked.innerText === "."){
+        appearNumbers(buttonClicked)
     }
-}
-
-function subNumbers() {
-    if (currentInput !== "") {
-        secondInput = parseFloat(currentInput);
-        if (!isNaN(secondInput)) {
-            operator = "-";
-            currentInput = "";
-            display.innerText = startingInput;
-        } else {
-            display.innerText = "Error";
+    else if(isNaN(buttonClicked.innerText)){
+        // When the user clicks on operator, the value on display is taken as startingInput and screen changes to 0 
+        if(buttonClicked.innerText === "+"){
+            startingInput = display.innerText;
+            display.innerText = "0";
+            operator = buttonClicked.innerText;
         }
-    }
-}
-
-function multNumbers() {
-    if (currentInput !== "") {
-        secondInput = parseFloat(currentInput);
-        if (!isNaN(secondInput)) {
-            operator = "*";
-            currentInput = "";
-            display.innerText = startingInput;
-        } else {
-            display.innerText = "Error";
+        else if(buttonClicked.innerText === "-"){
+            startingInput = display.innerText;
+            display.innerText = "0";
+            operator = buttonClicked.innerText;
         }
-    }
-}
-
-function divNumbers() {
-    if (currentInput !== "") {
-        secondInput = parseFloat(currentInput);
-        if (!isNaN(secondInput)) {
-            operator = "/";
-            currentInput = "";
-            display.innerText = startingInput;
-        } else {
-            display.innerText = "Error";
+        else if(buttonClicked.innerText === "*"){
+            startingInput = display.innerText;
+            display.innerText = "0";
+            operator = buttonClicked.innerText;
         }
-    }
-}
-
-function calculateResult() {
-    if (currentInput !== "") {
-        let result = parseFloat(currentInput);
-        if (!isNaN(result)) {
-            if (operator === "+") {
-                startingInput += result;
-            } else if (operator === "-") {
-                startingInput -= result;
-            } else if (operator === "*") {
-                startingInput *= result;
-            } else if (operator === "/") {
-                startingInput /= result;
+        else if(buttonClicked.innerText === "/"){
+            startingInput = display.innerText;
+            display.innerText = "0";
+            operator = buttonClicked.innerText;
+        }
+        //If the user clicks the equal button, the secondInput will be the last number displayed on the screen and 
+        //it will look at the operator to call the selected function
+        else{
+            console.log("=")
+            secondInput = display.innerText;
+            if(operator === "+"){
+                addNumbers(startingInput, secondInput)
             }
-
-            currentInput = "";
-            operator = ""; // Reset the operator after calculation
-            display.innerText = startingInput;
-        } else {
-            display.innerText = "Error";
+            else if(operator === "-"){
+                subNumbers(startingInput, secondInput)
+            }
+            else if(operator === "*"){
+                multNumbers(startingInput, secondInput)
+            }
+            else{
+                divNumbers(startingInput, secondInput)
+            }
         }
     }
 }
 
+//This function will add numbers together
+function addNumbers(num1, num2) {
+    display.innerText = parseInt(num1) + parseInt(num2);
+}
+
+//This function will subtract numbers from each other
+function subNumbers(num1, num2) {
+    display.innerText = parseInt(num1) - parseInt(num2);
+}
+
+//This function will multiply numbers together
+function multNumbers(num1, num2) {
+    display.innerText = parseInt(num1) * parseInt(num2);
+}
+
+//This function will divide numbers from each other
+function divNumbers(num1, num2) {
+    //If division does not work, the 0 might be a problem
+    if(num2 === 0){
+        display.innerText = "Error";
+    }
+    display.innerText = parseInt(num1) / parseInt(num2);
+}
+
+//This function will clear the display for the user to put in a new expression
 function clearDisplay() {
     startingInput = 0;
-    currentInput = "";
     secondInput = "";
     operator = "";
     display.innerText = "0";
 }
 
+//This for loop allows every single button, including numbers and operators, to handle user's clicks
 for (let i = 0; i < numButtons.length; i++) {
-    numButtons[i].addEventListener("click", appearNumbers);
+    numButtons[i].addEventListener("click", handleClick);
 }
 
-addBtn.addEventListener("click", addNumbers);
-subBtn.addEventListener("click", subNumbers);
-multBtn.addEventListener("click", multNumbers);
-divBtn.addEventListener("click", divNumbers);
-
-equalBtn.addEventListener("click", calculateResult);
+//These are the event listeners for the equal and clear buttons
 clear.addEventListener("click", clearDisplay);
