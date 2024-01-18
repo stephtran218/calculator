@@ -10,7 +10,14 @@ let operator = "";
 
 //This function allows the buttons clicked to show its value on the calculator display
 function appearNumbers(thing) {
-    display.innerText = thing.innerText
+    //If the display is 0, the screen will change to a new value completely
+    if(display.innerText === "0"){
+        display.innerText = thing.innerText;
+    }
+    //If display is not 0, it indicates that there's an existing value so next button clicked will be taken as double digits
+    else{
+        display.innerText += thing.innerText
+    }
 }
 
 //Once user clicks on the button, the number displayed will be taken as startingInput. 
@@ -46,7 +53,6 @@ function handleClick(event) {
         //If the user clicks the equal button, the secondInput will be the last number displayed on the screen and 
         //it will look at the operator to call the selected function
         else{
-            console.log("=")
             secondInput = display.innerText;
             if(operator === "+"){
                 addNumbers(startingInput, secondInput)
@@ -81,11 +87,14 @@ function multNumbers(num1, num2) {
 
 //This function will divide numbers from each other
 function divNumbers(num1, num2) {
-    //If division does not work, the 0 might be a problem
-    if(num2 === 0){
+    //If expression is divided by 0, the display will return "Error"
+    if(parseFloat(num2) === 0){
         display.innerText = "Error";
     }
+    //If denominator is not a 0, it will perform the division 
+    else{
     display.innerText = parseInt(num1) / parseInt(num2);
+    }
 }
 
 //This function will clear the display for the user to put in a new expression
